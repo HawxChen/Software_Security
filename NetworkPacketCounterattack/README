@@ -1,0 +1,7 @@
+* This defensvie program is implemented through Scapy and protects victims by returning malicious packets to corresponding attackers.
+
+Firstly, I built the mac/ip mapping for ARP response. if an attacker arpinged the victim, my reflector would send back the victim's mac/ip to the attacker. If an attackr arpinged the Reflector, my reflector would send back its own mac/ip to the attacker.
+
+Secondly, I will check IP field for IP/TCP/UDP/ICMP. If it exists, i will fiter the packet through the Destination IP field for Victim IP and Reflector IP. If the packet is for victim, I will return the packet with the same function through the SRC IP/MAC field from Reflector.  
+
+Finally, if the packet is for the reflector, I will return the packet with the same function through the SRC IP/MAC field from the victim.  
