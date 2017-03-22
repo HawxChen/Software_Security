@@ -1,0 +1,8 @@
+* The command is executed from http://server/exec/”command”, then redirected STDOUT result to the web page.
+* I/O buffer is Equipped with self-made vector support so that users never suffer from buffer overflow
+
+Firstly, I use the easy parser to extract the string including NULL string  between /exec/ and HTTP/1.1\r\n. If I can not find the pattern /exec/ or HTTP/1.1\r\n, then I will return 404 code. Otherwise, I will return 200 OK.
+
+Secondly, when I get the command string, ls or kfjslafjlsaj (It will be reported as No Such Command by System), I will redirect all stdout result to client with 200 OK. As for stderr, that's my debugging output.
+
+Finally, after one client closes the socket, my server will close the socket, too. Then my server will collect the forked process used by the client.
